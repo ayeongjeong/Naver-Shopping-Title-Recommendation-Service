@@ -1,0 +1,36 @@
+{% load static %}
+<style> .centered { width: 400px; position: absolute; left: 50%; margin-left: -200px; } </style>
+
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  
+    <body class="w3-container">
+        <form action="/sub" method="get">
+                <div class="w3-display-container w3-text-white">
+                <img src="{% static 'main_image.jpg' %}" alt="Lights" style="width:100%">
+                <!-- <div class="w3-display-topleft w3-container"><p>Top Left</p></div> -->
+                <!-- <div class="w3-display-topright w3-container"><p>Top Right</p></div> -->
+                <!-- <div class="w3-display-bottomleft w3-container"><p>Bottom Left</p></div> -->
+                <!-- <div class="w3-display-bottomright w3-container"><p>Bottom Right</p></div> -->
+                <div class="w3-display-topmiddle" style="top:200px; font-weight:500; font-size:2.0em">상품명과 상품제목을 입력하시면 제목에 대한 점수를 알려드립니다.</div>
+                <!-- <div class="w3-display-left w3-container">Left</div>
+                <div class="w3-display-right w3-container">Right</div> -->
+                <div class="w3-display-middle w3-large">
+                    <select class="main-select" name="product_select">
+                        <option value="50000145">축산</option>
+                        <option value="50000159">수산</option>
+                        <option value="50000160">농산물</option>
+                        <option value="50000150">가공식품</option>
+                        <option value="50000026">냉동/간편조리식품</option>
+                    </select>
+                    <input class="main-input" type="text" placeholder="상품명" name="product">
+                    <input class="main-input" type="text" placeholder="상품제목" style="width: 10cm;" name="title">
+                    <button type="submit"><img src="{% static 'icon.png' %}" width="15"height="28"></button>
+                </div>
+                <div class="w3-display-bottommiddle"><p>SD걸즈의 팀프로젝트입니다.</p></div>
+                <!-- <div class="w3-display-position w3-padding w3-red" style="top:100px;left:100px">Positioned</div> -->
+            </div>
+        </form>
+    </body>
+</html>
