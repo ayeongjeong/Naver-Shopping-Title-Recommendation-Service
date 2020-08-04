@@ -1,3 +1,18 @@
 {
-    "python.pythonPath": "/home/sundooedu/anaconda3/bin/python"
+    "python.pythonPath": "/home/sundooedu/anaconda3/bin/python",
+    "sqltools.connections": [
+        {
+            "askForPassword": true,
+            "database": "yojulabdb",
+            "driver": "MariaDB",
+            "mysqlOptions": {
+                "authProtocol": "default"
+            },
+            "name": "test_maria",
+            "port": 3306,
+            "previewLimit": 50,
+            "server": "192.168.0.154",
+            "username": "scott"
+        }
+    ]
 }
