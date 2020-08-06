@@ -22,7 +22,7 @@ product_name = '미숫가루'
 url_wc = 'https://search.shopping.naver.com/search/all?frm=NVSHCHK&origQuery={}&pagingSize=5&productSet=checkout&query={}&sort=rel&timestamp=&viewType=list&pagingIndex='.format(product_name, product_name)
 board_info = []
 
-for i in range(1,100):
+for i in range(1,2):
     res = requests.get(url_wc+str(i))
     if res.status_code == 200 :
         soup = BeautifulSoup(res.content, 'html.parser')
@@ -66,8 +66,8 @@ result1
 # 폰트의 경우 경로 지정 必
 def displaywordcloud (data=None, backgroundcolor='white', width=800, height=700):
     wordcloud = WordCloud(
-        font_path = '/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf',
-        # font_path = '/home/sundooedu/다운로드/NanumBarunGothic.ttf',
+        # font_path = '/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf',
+        font_path = 'C:Windows/Fonts/NanumGothicCoding.ttf',
         # mask = alice_mask,
         stopwords = stop_words,
         background_color = backgroundcolor,
@@ -75,9 +75,10 @@ def displaywordcloud (data=None, backgroundcolor='white', width=800, height=700)
     fig = plt.figure(figsize=(15,10))
     plt.imshow(wordcloud, interpolation="bilinear")
     plt.axis("off")
-    # plt.show
+    plt.show
+    print("된다!!!!!")
     # fig.savefig('./static/wordcloud.png')
-    fig.save_file('./static/wordcloud.png')
+    # fig.save_file('./static/wordcloud.png')
 
     
 # result1에 리스트로 단어가 담겨 있음

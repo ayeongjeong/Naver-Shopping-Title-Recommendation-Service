@@ -71,7 +71,8 @@ def sub(request):
     # options.add_argument("disable-gpu")
 
     # URL
-    driver = webdriver.Chrome('/home/sundooedu/문서/instagram/chromedriver', chrome_options=options)
+    # C:\Users\sundooedu\Naver-Shopping-Title-Recommendation-Service\Nshoping
+    driver = webdriver.Chrome('C:/Users/sundooedu/Desktop/Nshoping/chromedriver.exe', chrome_options=options)
     loginUrl = 'https://www.instagram.com/explore/tags/'+product_name
     driver.implicitly_wait(5)
     driver.get(loginUrl)
@@ -83,7 +84,7 @@ def sub(request):
     # 태그 크롤링
     source = driver.page_source
     soup = BeautifulSoup(source, 'html.parser')
-    popular = soup.select('div.EZdmt > div > div > div:nth-child(1)')
+    popular = soup.select('div.EZdmt > div > div > div:nth-of-type(1)')    #nth-child -> nth-of-type
     
     embed=[]
     for line in popular:
@@ -141,22 +142,20 @@ def sub(request):
         result1.extend(result[i])
     result1
             
-
-    # alice_mask = np.array(Image.open("../webservice/static/alice_mask.png")) # 워드클라우드 모형 수치화
+    alice_mask = np.array(Image.open("./static/alice_mask.png")) # 워드클라우드 모형 수치화
     # alice_mask = np.array(open(os.path.join('/static','alice_mask.png'), 'r'))
 
     # 폰트의 경우 경로 지정 必
     def displaywordcloud (data=None, backgroundcolor='white', width=1280, height=768):
         wordcloud = WordCloud(
-            font_path = '/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf',
-            # mask = alice_mask,
+            font_path = 'C:Windows/Fonts/NanumGothicCoding.ttf',
+            mask = alice_mask,
             stopwords = stop_words,
             background_color = backgroundcolor,
             width = width, height = height).generate(data)
         fig = plt.figure(figsize=(15,10))
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
-        return www
         # plt.show
         # fig.savefig('./static/wordcloud.png')
         
