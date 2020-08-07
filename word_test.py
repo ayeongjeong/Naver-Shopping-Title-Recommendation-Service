@@ -88,8 +88,7 @@ def displaywordcloud (data=None, backgroundcolor='white', width=1280, height=768
     plt.imshow(wordcloud, interpolation="bilinear")
     plt.axis("off")
     plt.show
-    print('a')
-    
+
 # result1에 리스트로 단어가 담겨 있음
 course_text = " ".join(result1)
 displaywordcloud(course_text)
