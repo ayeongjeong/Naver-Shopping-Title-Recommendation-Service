@@ -6,23 +6,24 @@
 
     <body>
         <div class="sub-top">
-            <h3>입력하신 상품제목은 {{title}} 입니다.</h3>
-            <h2>상품제목 점수</h2></br>
-            <p>추천 상품제목</p>
+            <h3>입력하신 상품제목은 "{{title}}" 입니다.</h3>
+            {% comment %} <h2>상품제목 점수</h2></br> {% endcomment %}
+            {% comment %} <p>추천 상품제목</p> {% endcomment %}
             <!-- 스마트스토어 가이드 -->
         </div>
-        <!-- <div class="sub-mid"> -->
+        <div class="sub-mid">
             <!-- 같은 상품의 네이버 쇼핑 top5 -->
             <!-- 네이버 쇼핑 상품제목들의 워드클라우드 -->
             <!-- 네이버 검색어 트렌드 -->
-        <!-- </div> -->
+        <h3> < {{product}} 연관 키워드 ></h3>
+        <img src="{% static './wordcloud.png' %}" width="1000px")/>
 
-        <img src="{% static './static/wordcloud.png' %}" width="800px")/>
-        {{www}}
         <h2>네이버 검색어 트렌드를 보여 드립니다<h2>
         {{div | safe}}
-
+        </div>
+        
         {% comment %} url 뒤에 embed 꼭 들어가야 함 {% endcomment %}
+        <h2>instagram #{{product}} 인기 게시물</h2>
         <div class='instagram'>
             <table width='1200'>
                 <tr>
