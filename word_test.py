@@ -41,7 +41,7 @@ stop_words = ['아무렇게나', '다', '게', '예컨대', '로', '나','도', 
 # # stop_words = stop_words.split(' ')
 
 def clean_str(text):
-    pattern = '[^\w\s]'         # 특수기호제거
+    pattern = '[-=,#/\?:^$.@\"※~&ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]'         # 특수기호제거
     text = re.sub(pattern=pattern, repl='', string=text)
     return text
 
