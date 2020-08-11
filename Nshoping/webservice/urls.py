@@ -7,6 +7,7 @@ urlpatterns = [
     path("main/", views.main),
     # path('sub/', views.sub, name='sub'),
     path('sub/', views.sub, name='sub'),
+    path('naverguide/', views.guide, name='guide'),
 ]
 
 

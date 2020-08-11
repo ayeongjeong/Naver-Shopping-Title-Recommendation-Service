@@ -16,26 +16,25 @@ import matplotlib.pyplot as plt
 from wordcloud import WordCloud, STOPWORDS   # 워드클라우드 함수화
 from PIL import Image
 import nltk
-nltk.download('punkt')
+# nltk.download('punkt')
 from nltk.corpus import stopwords 
 from nltk.tokenize import word_tokenize
 from tqdm import trange 
 import os.path
-
+import re
 
 
 def main(request):
     return render(request, template_name='main.html')
     
-# def sub(request):
-#     data = request.GET.copy()
-#     return render(request,template_name='sub.html', context=data)
+def guide(request):
+    return render(request, template_name='naverguide.html')
 
 def sub(request):
     sub_data = request.GET.copy()
     product_name = sub_data['product']
 
-    ### 네이버 트렌드 크롤링
+    ### 네이버 트렌드 크롤링------------------------------------
     client_id = "Zxda6O8OHP58VUd07OoF"
     client_secret = "h65D3z_YOw"
     header = {'X-Naver-Client-Id': client_id, 'X-Naver-Client-Secret': client_secret, 'Content-Type':'application/json'}
@@ -56,14 +55,14 @@ def sub(request):
 
     df4graph['period'] = pd.to_datetime(df4graph['period'])
 
-    ### 보케 그래프
+    ### 보케 그래프 --------------------------------------
     p = figure(title='TEST', x_axis_type="datetime", x_axis_label='period', y_axis_label='trend ratio' , plot_height=500, plot_width=1200)
     p.xaxis.formatter = DatetimeTickFormatter(months=["%Y/%m/%d"])
     p.xaxis.major_label_orientation = pi/3
     p.line(x=df4graph.period, y=df4graph.ratio, legend_label='trend ratio', line_width=2, color='cadetblue', alpha=0.9)
     script, div = components(p)
         
-    ### 인스타그램 크롤링    
+    ### 인스타그램 크롤링 ----------------------------------
     # headless options (브라우저 뜨지 않음)
     options = webdriver.ChromeOptions()
     options.add_argument('headless')
@@ -71,7 +70,7 @@ def sub(request):
     # options.add_argument("disable-gpu")
 
     # URL
-    # C:\Users\sundooedu\Naver-Shopping-Title-Recommendation-Service\Nshoping
+    # C:\Users\sundooedu\Naver-Shopping-Title-Recommendation-Service\Nshoping -linux url
     driver = webdriver.Chrome('C:/Users/sundooedu/Desktop/Nshoping/chromedriver.exe', chrome_options=options)
     loginUrl = 'https://www.instagram.com/explore/tags/'+product_name
     driver.implicitly_wait(5)
@@ -98,58 +97,57 @@ def sub(request):
     url3 = "https://instagram.com{}embed".format(embed[2]) 
 
 
-    ### 워드 클라우드
+    ### 워드 클라우드  ---------------------------------------------
     # 워드클라우드 위한 네이버 쇼핑 검색 결과 (with Request.GET)
 
     ## .format(product,product) 는 0.0.0.0/main 에서 입력받은 product 값을 반영함
-    url_wc = 'https://search.shopping.naver.com/search/all?frm=NVSHCHK&origQuery={}&pagingSize=5&productSet=checkout&query={}&sort=rel&timestamp=&viewType=list&pagingIndex='.format(product_name, product_name)
-    board_info = []
-    
-    for i in range(1,10):   # 한번에 5개
-        res = requests.get(url_wc+str(i))
-        if res.status_code == 200 :
-            soup = BeautifulSoup(res.content, 'html.parser')
-            f_all = soup.find_all('div', class_ = 'basicList_inner__eY_mq')
-            for f in f_all:
-                t_1 = f.find('a', class_ = 'basicList_link__1MaTN')     # tag of title, links and rank
-                title = t_1.get('title')
-                board_info.append({'title':title})
-    # print(board_info)
+    url_wc = 'https://search.shopping.naver.com/search/all?frm=NVSHCHK&origQuery={}&pagingSize=100&productSet=checkout&query={}&sort=rel&timestamp=&viewType=list&pagingIndex='.format(product_name, product_name)
+
+    res = requests.get(url_wc)
+    if res.status_code == 200 :
+        soup = BeautifulSoup(res.content, 'html.parser')
+        f_all = soup.find_all('script', id = '__NEXT_DATA__')
+        f_txt = str.strip(f_all[0].get_text())
+        json_data = json.loads(f_txt)
+        json_string = json_data["props"]["pageProps"]["initialState"]["products"]["list"]
 
     a = []
-    for info in board_info: # Cursor
-        a.append(info['title'])
+    for dic in json_string:
+        content = dic['item']
+        title = content['productTitle']
+        a.append(title)
 
     df = pd.DataFrame({"title": a})
-    a = df.title.tolist()
+            
+    mask_png = np.array(Image.open("webservice/static/one.png")) # 워드클라우드 mask
+    
+    def clean_str(text):
+        pattern = '[-=,#/\?:^$.@\"※~&ㆍ!』\\‘|\(\)\[\]\<\>`\'…》]'         # 특수기호제거
+        text = re.sub(pattern=pattern, repl=' ', string=text)   # repl 띄어쓰기!
+        return text
 
-    # nltk.download('punkt')
+    df['title'] = df.title.map(clean_str) # 특수기호 제거
+    # df['title'] = df.title.map(word_tokenize)
+    df['title'] = df['title'].str.replace("   "," ")
+    df['title'] = df['title'].str.replace("  "," ")
+    df['title'] = df['title'].str.split(" ")
 
-    stop_words = ['아무렇게나', '다', '게', '예컨대', '로', '나','도', '+']
-    # # stop_words = stop_words.split(' ')
-
-    word_tokens = []
-    for i in range(len(a)): #trange
-        word_tokens.append(word_tokenize(a[i]))
-
-    result = [] 
-    for w in word_tokens: 
-        if w not in stop_words: 
-            result.append(w) 
 
     result1 = []            # 하나의 리스트화 & extend 함수(멤버 메서드) 이용하여 확장하기
-    for i in range(len(result)):    #trange
-        result1.extend(result[i])
-    result1
-            
-    # alice_mask = np.array(Image.open("webservice/static/alice_mask.png")) # 워드클라우드 모형 수치화
+    for i in trange(len(df.title)):
+        result1.extend(df.title[i])
 
+    stopwords = []
     # 폰트의 경우 경로 지정 必
-    def displaywordcloud (data=None, backgroundcolor='white', width=1280, height=768):
+    def displaywordcloud (data=None, backgroundcolor='white', width=1280, height=400):
+        stopwords.append(product_name)
         wordcloud = WordCloud(
-            font_path = 'C:Windows/Fonts/NanumGothicCoding.ttf',
-            # mask = alice_mask,
-            stopwords = stop_words,
+            font_path = 'C:Windows/Fonts/NanumGothicCoding-Bold.ttf',
+            mask = mask_png,
+            stopwords = stopwords,
+            collocations=False, 
+            max_font_size= 180,
+            colormap= 'twilight',
             background_color = backgroundcolor,
             width = width, height = height).generate(data)
         fig = plt.figure(figsize=(30,10))

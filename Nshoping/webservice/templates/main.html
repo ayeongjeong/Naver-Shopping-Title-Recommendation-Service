@@ -2,11 +2,26 @@
 <style> .centered { width: 400px; position: absolute; left: 50%; margin-left: -200px; } </style>
 
 <html>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-  
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+        <script type="text/javascript">
+            function load_fuc(){
+                document.getElementById('loading').style.visibility = 'visible';
+                document.getElementById('form').style.visibility = 'hidden';
+            }
+        </script>
+    </head>
+
     <body class="w3-container">
-        <form action="/sub" method="get">
+        <div align='center' id="loading" 
+            style='width: 100%;  height: 100%; display: block; position: fixed; opacity: 1.0; background-color: #fff; z-index: 99; visibility:hidden; margin: 0 auto;'>
+            <img id="loading-image" src="{% static './loading.gif' %}" alt="Loading..." style="position: absolute;  top: 400px; left: 45%; z-index: 100; margin: 0 auto;">
+            <p style='line-height: 1000px; text-align: center;'>
+            Naum이 상품제목에 대한 점수를 계산 중 입니다. 잠시만 기다려 주세요.</p></div>
+
+        <form action="/sub" id='form' method="get" onsubmit='load_fuc'>
                 <div class="w3-display-container w3-text-white">
                 <img src="{% static 'main_image.jpg' %}" alt="Lights" style="width:100%">
                 <!-- <div class="w3-display-topleft w3-container"><p>Top Left</p></div> -->
@@ -23,10 +38,13 @@
                         <option value="50000160">농산물</option>
                         <option value="50000150">가공식품</option>
                         <option value="50000026">냉동/간편조리식품</option>
+                        <option value="50000146">반찬</option>
+                        <option value="50000147">김치</option>
+                        <option value="50000148">음료</option>
                     </select>
                     <input class="main-input" type="text" placeholder="상품명" name="product">
                     <input class="main-input" type="text" placeholder="상품제목" style="width: 10cm;" name="title">
-                    <button type="submit"><img src="{% static 'icon.png' %}" width="15"height="28"></button>
+                    <button type="submit" id='button' onclick='load_fuc()'><img src="{% static 'icon.png' %}" width="15"height="28"></button>
                 </div>
                 <div class="w3-display-bottommiddle"><p>네이버 쇼핑 상품명 추천 시스템 Naum입니다.</p></div>
                 <!-- <div class="w3-display-position w3-padding w3-red" style="top:100px;left:100px">Positioned</div> -->
