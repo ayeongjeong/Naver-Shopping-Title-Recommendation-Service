@@ -105,7 +105,7 @@ def sub(request):
     url_wc = 'https://search.shopping.naver.com/search/all?frm=NVSHCHK&origQuery={}&pagingSize=5&productSet=checkout&query={}&sort=rel&timestamp=&viewType=list&pagingIndex='.format(product_name, product_name)
     board_info = []
     
-    for i in range(1,100):
+    for i in range(1,10):   # 한번에 5개
         res = requests.get(url_wc+str(i))
         if res.status_code == 200 :
             soup = BeautifulSoup(res.content, 'html.parser')
@@ -142,22 +142,21 @@ def sub(request):
         result1.extend(result[i])
     result1
             
-    alice_mask = np.array(Image.open("./static/alice_mask.png")) # 워드클라우드 모형 수치화
-    # alice_mask = np.array(open(os.path.join('/static','alice_mask.png'), 'r'))
+    # alice_mask = np.array(Image.open("webservice/static/alice_mask.png")) # 워드클라우드 모형 수치화
 
     # 폰트의 경우 경로 지정 必
     def displaywordcloud (data=None, backgroundcolor='white', width=1280, height=768):
         wordcloud = WordCloud(
             font_path = 'C:Windows/Fonts/NanumGothicCoding.ttf',
-            mask = alice_mask,
+            # mask = alice_mask,
             stopwords = stop_words,
             background_color = backgroundcolor,
             width = width, height = height).generate(data)
-        fig = plt.figure(figsize=(15,10))
+        fig = plt.figure(figsize=(30,10))
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
         # plt.show
-        # fig.savefig('./static/wordcloud.png')
+        fig.savefig('webservice/static/wordcloud.png')
         
     # result1에 리스트로 단어가 담겨 있음
     course_text = " ".join(result1)
@@ -165,4 +164,4 @@ def sub(request):
 
 
     return render(request, 'sub.html',{'script':script, 'div':div, 'title':sub_data['title'],
-                    'url1':url1, 'url2':url2, 'url3':url3})
+                    'url1':url1, 'url2':url2, 'url3':url3, 'product':product_name})

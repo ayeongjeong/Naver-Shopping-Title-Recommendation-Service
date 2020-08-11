@@ -60,7 +60,7 @@ for i in range(len(result)):    #trange
 result1
         
 
-# alice_mask = np.array(Image.open("../webservice/static/alice_mask.png")) # 워드클라우드 모형 수치화
+alice_mask = np.array(Image.open("webservice/static/alice_mask.png")) # 워드클라우드 모형 수치화
 # alice_mask = np.array(open(os.path.join('/static','alice_mask.png'), 'r'))
 
 # 폰트의 경우 경로 지정 必
@@ -68,7 +68,7 @@ def displaywordcloud (data=None, backgroundcolor='white', width=800, height=700)
     wordcloud = WordCloud(
         # font_path = '/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf',
         font_path = 'C:Windows/Fonts/NanumGothicCoding.ttf',
-        # mask = alice_mask,
+        mask = alice_mask,
         stopwords = stop_words,
         background_color = backgroundcolor,
         width = width, height = height).generate(data)
@@ -77,7 +77,7 @@ def displaywordcloud (data=None, backgroundcolor='white', width=800, height=700)
     plt.axis("off")
     plt.show
     print("된다!!!!!")
-    # fig.savefig('./static/wordcloud.png')
+    fig.savefig('webservice/static/wordcloud.png')
     # fig.save_file('./static/wordcloud.png')
 
     
