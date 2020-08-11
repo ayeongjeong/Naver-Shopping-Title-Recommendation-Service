@@ -34,7 +34,13 @@ data_df['category'] = data_df['category'].astype(str)
 data_df['total'] = data_df['category']+' '+data_df['product']+' '+data_df['title']
 data_df = data_df[['category','product','title','total','rank']]
 
-data_df['total'] = data_df.total.map(word_tokenize)
+# # data_df['total'] = data_df.total.map(word_tokenize)
+data_df['total'] = data_df['total'].str.replace("    "," ")
+data_df['total'] = data_df['total'].str.replace("   "," ")
+data_df['total'] = data_df['total'].str.replace("  "," ")
+data_df['total2'] = data_df['total'].str.split(" ")
+
+data_df = data_df[['category','product','title','total','total2','rank']]
 
 result = []                 # 하나의 리스트화 & extend 함수(멤버 메서드) 이용하여 확장하기
 for i in trange(len(data_df.title)):
@@ -55,7 +61,7 @@ data_df['rank']
 
 # db에서 rank값이 text(str)으로 되어있었으므로, 계산위해 int 형으로 변경
 
-data_df['rank'] = data_df['rank'].astype('int')
+data_df['rank'] = data_df['rank'].astype('int32')
 rank_max = data_df.groupby(['product'])['rank'].max().reset_index(drop = False)
 
 # 상품명으로 그룹핑하여 최대 랭크값을 찾아 해당 행의 랭크 위치값 도출
@@ -87,21 +93,28 @@ for i in score:
 
 data_df['score'] = s_result
 
+data_df['rank'] = data_df['rank'].astype('str')
+
 mongo = []
+
 for i in range(len(data_df)):
     cate = data_df['category'][i]    
     prod = data_df['product'][i]
     title = data_df['title'][i]
     total = data_df['total'][i]
+    total2 = data_df['total2'][i]
     score = data_df['score'][i]
-    mg_dict = {'category':cate, 'product':prod, 'title':title,'total':total,'score':score}
+    rank = data_df['rank'][i]
+    mg_dict = {'category':cate, 'product':prod, 'title':title,'total':total,'total2':total2,'rank':rank,'score':score}
     mongo.append(mg_dict)
 
 mongo
 
-from pymongo import MongoClient
-client = MongoClient('mongodb://192.168.0.154:27017/')
-mydb = client.mydb
-makeCollection = mydb.processed.insert_many(mongo)
+print(mongo)
+
+# from pymongo import MongoClient
+# client = MongoClient('mongodb://192.168.0.154:27017/')
+# mydb = client.mydb
+# makeCollection = mydb.processed.insert_many(mongo)
 
 client.close()
