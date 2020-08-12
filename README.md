@@ -1,8 +1,11 @@
 # Naver-Shopping-Title-Checking-Service
 # Naver smartstore Attractive User Message
 > Members
+> 김
+> 윤
+> 정
 
-> * sfaafaf
+> * sfaa
 
 
 
