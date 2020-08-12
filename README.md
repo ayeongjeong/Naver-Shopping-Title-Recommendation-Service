@@ -1,7 +1,9 @@
 # Naver-shopping Attractive User Message
 >	네이버 스마트스토어에서 판매하려는 상품의 카테고리·종류·제목에 관한 등급 테스트 서비스
 
+
 ### Index
+
 
 > * List
 >	```
