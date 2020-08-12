@@ -1,4 +1,4 @@
-# Naver-Shopping-Title-Recommendation-Service
+# Naver-Shopping-Title-Checking-Service
 - 빨강 
   - 녹색
     - 파랑
