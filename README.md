@@ -1,5 +1,5 @@
 # Naver- Attractive User Message
-> 네이버 스마트스토어
+> 네이버 스마트스토어 판매자를 위한 상품명 테스트 서비스
 
 
 
