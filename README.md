@@ -1,30 +1,9 @@
 # Naver-Shopping-Title-Checking-Service
+# Naver smartstore Attractive User Message
 
 > ### Members
 
 > * sfaafaf
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
