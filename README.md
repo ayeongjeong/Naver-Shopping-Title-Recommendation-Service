@@ -1,4 +1,4 @@
-# Naver- Attractive User Message
+# Naver-shopping Attractive User Message
 > ### 취지
 >	```
 >	네이버 스마트스토어에서 판매하려는 상품의 카테고리·종류·제목에 관한 테스트 서비스
