@@ -1,5 +1,5 @@
 # Naver-Shopping-Title-Checking-Service
-# Naver smartstore Attractive User Message
+# Naver- Attractive User Message
 > Members
 > * 김
 > * 윤
