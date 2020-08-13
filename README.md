@@ -37,7 +37,6 @@
 
 ![](./images/display-4.gif)
 
- &nbsp;
 
 ### 장소 저장 및 리스트 조작
 
