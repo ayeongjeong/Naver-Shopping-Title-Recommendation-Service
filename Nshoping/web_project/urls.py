@@ -21,7 +21,3 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('webservice.urls')),
 ]
-
-# background tasks schedule setting
-from crawling.DB_Nshopping import task_crawling_naver
-task_crawling_naver(schedule = 60, repeat = 60*60*24*7)

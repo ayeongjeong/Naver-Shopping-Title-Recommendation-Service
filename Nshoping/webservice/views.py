@@ -22,7 +22,7 @@ from nltk.tokenize import word_tokenize
 from tqdm import trange 
 import os.path
 import re
-
+import pickle
 
 def main(request):
     return render(request, template_name='main.html')
@@ -56,7 +56,7 @@ def sub(request):
     df4graph['period'] = pd.to_datetime(df4graph['period'])
 
     ### 보케 그래프 --------------------------------------
-    p = figure(title='TEST', x_axis_type="datetime", x_axis_label='period', y_axis_label='trend ratio' , plot_height=500, plot_width=1200)
+    p = figure(title='TEST', x_axis_type="datetime", x_axis_label='period', y_axis_label='trend ratio' , plot_height=500, plot_width=1000)
     p.xaxis.formatter = DatetimeTickFormatter(months=["%Y/%m/%d"])
     p.xaxis.major_label_orientation = pi/3
     p.line(x=df4graph.period, y=df4graph.ratio, legend_label='trend ratio', line_width=2, color='cadetblue', alpha=0.9)
@@ -139,18 +139,19 @@ def sub(request):
 
     stopwords = []
     # 폰트의 경우 경로 지정 必
-    def displaywordcloud (data=None, backgroundcolor='white', width=1280, height=400):
+    def displaywordcloud (data=None, backgroundcolor='#fff', width=1000,height=1000):
         stopwords.append(product_name)
         wordcloud = WordCloud(
             font_path = 'C:Windows/Fonts/NanumGothicCoding-Bold.ttf',
             mask = mask_png,
             stopwords = stopwords,
             collocations=False, 
-            max_font_size= 180,
-            colormap= 'twilight',
+            max_font_size= 160,
+            colormap= 'tab10',
             background_color = backgroundcolor,
-            width = width, height = height).generate(data)
-        fig = plt.figure(figsize=(30,10))
+            width = width, height = height
+            ).generate(data)
+        fig = plt.figure(figsize=(10,10))
         plt.imshow(wordcloud, interpolation="bilinear")
         plt.axis("off")
         # plt.show
@@ -159,7 +160,30 @@ def sub(request):
     # result1에 리스트로 단어가 담겨 있음
     course_text = " ".join(result1)
     displaywordcloud(course_text)
+    
+    # 관련 키워드 피클 ------------------------------------------------
+    recommend = pickle.load(open("./webservice/word2vec.pkl", "rb"))
+    recommend_list=[]
+    for i in range(10):
+        recommend_list.append(recommend.most_similar(positive = product_name)[i][0])
 
+
+    # 모델 h5 -----------
+    # import tensorflow as tf
+
+    # clean_title = sub_data.title.map(clean_str)
+    # clean_title = clean_title.str.replace("   "," ")
+    # clean_title = clean_title.str.replace("  "," ")
+
+    # model_input = sub_data['category']+" "+sub_data['product']+" "+clean_title
+
+    # print(model_input)
+    # def modeling_NAUM(data):
+    #     first_model = tf.keras.models.load_model('webservice/modeling_NAUM.h5')
+    #     result = first_model.predict(data)
+    #     return result
+
+    # modeling_NAUM(model_input)
 
     return render(request, 'sub.html',{'script':script, 'div':div, 'title':sub_data['title'],
-                    'url1':url1, 'url2':url2, 'url3':url3, 'product':product_name})
+                    'url1':url1, 'url2':url2, 'url3':url3, 'product':product_name, 'recommend':recommend_list})
