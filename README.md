@@ -7,7 +7,7 @@
 
 - [전처리 과정](#전처리-과정)
 - [모델 설계 및 구현](#모델-설계-및-구현)
-- [trouble shooting](#trouble-shooting)
+- [WEB Server 구동 화면](#WEB-Server-구동-화면)
 - [학습한 내용](#관련-학습-내용)
 
 ---
@@ -227,7 +227,7 @@ API 에서 받아온 date & time (UTC 표준)  → 각 나라별 시간으로 �
 
 ---
 
-## Trouble Shooting
+## WEB Server 구동 화면
 
 ### Page View Controller 에서 계속해서 WeatherViewController 를 생성하는 문제
 
