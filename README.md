@@ -1,11 +1,6 @@
 # NAUM 서비스 프로젝트(Naver-shopping Attractive User Message)  
 >	**네이버 스마트스토어 상품의 카테고리·종류·제목에 관한 등급 테스트 서비스**  
 
-### Index  
-- 전처리 : [링크](#id)	
-- 모델링
-- 서비스 
-
 &nbsp;
 
 ### Index
