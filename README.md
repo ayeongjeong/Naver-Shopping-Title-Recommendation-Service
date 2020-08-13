@@ -18,7 +18,6 @@
   <img src="./images/display-3.gif" width="250" />
 </p>
 
- &nbsp;
 
 ---
 
