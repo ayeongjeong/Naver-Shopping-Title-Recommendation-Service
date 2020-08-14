@@ -27,10 +27,6 @@
 - [WEB Server 구동 화면](#WEB-Server-구동-화면)
 
 &nbsp;
- 
-![99F0AC4B5CBF360009](https://user-images.githubusercontent.com/64175895/90209667-f512e080-de26-11ea-8e6e-4e3296c328eb.jpeg)
-
-&nbsp;
 
 ## 전처리 과정
 
