@@ -10,6 +10,7 @@
 - [WEB Server 구동 화면](#WEB-Server-구동-화면)
 - [학습한 내용](#관련-학습-내용)
 
+![search pstatic net](https://user-images.githubusercontent.com/64175895/90209449-6b631300-de26-11ea-870f-82ed13b07fcd.jpeg)
 ---
 
 <p float="left">
