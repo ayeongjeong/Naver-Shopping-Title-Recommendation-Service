@@ -10,7 +10,7 @@
 
 &nbsp;
 
-### 프로젝트 진행 과정
+## 프로젝트 진행 과정
 
 - [전처리](#전처리-과정)
 - [모델 설계 및 구현](#모델-설계-및-구현)
@@ -20,6 +20,13 @@
 
 ### 구성원 및 역할 분담
 
+| 구성원 이름          | 역할                                                         |
+| ----------------------- | ------------------------------------------------------------ |
+|       `김소현`        | 크롤링 작업으로 축적한 DB를 보다 수월하                |
+|       `윤혜인`        | - 네트워킹 통한 날씨 예측 정보 가져오기<br />- `WeatherData` 타입으로 json decoding 하기 |
+|       `정아영`        | `Django 웹 서버 구축 및 디자인` & `시각화, 인스타그램 크롤링 작업'  |
+
+
 |구성원|역할|
 |:------------:|:------------:|
 |김소현|크롤링으로 축적된 DB 관린 및 전저리 작업|
@@ -28,6 +35,7 @@
 
 &nbsp;
 
+---
 ## 전처리 과정
 
 - [상품 관련 검색어 트렌드 크롤링](#상품-관련-검색어-트렌드-크롤링)
@@ -40,6 +48,7 @@
 ### [상품 관련 검색어 크롤링](https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/NshoppingDBCrawler_hi.py)
 
 ![스크린샷, 2020-08-14 15-50-55](https://user-images.githubusercontent.com/64175895/90222165-7b8aea80-de46-11ea-89a0-9286b278c23e.png)
+
 
 ### [instagram 인기 게시물 크롤링](https://github.com/kim-so-hyeon/Naum-Web-Service/blob/master/webservice/views.py)
 
