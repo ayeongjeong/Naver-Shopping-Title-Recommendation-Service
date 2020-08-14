@@ -28,7 +28,7 @@
 
 ## 전처리 과정
 
-- [상품 관련 검색어 트렌드 크롤링](#상품-관련-검색어-트렌드-크롤링)(https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/NshoppingDBCrawler_hi.py)
+- [상품 관련 검색어 트렌드 크롤링](https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/NshoppingDBCrawler_hi.py)(#상품-관련-검색어-트렌드-크롤링)
 - [instagram 인기 게시물 크롤링](#instagram-인기-게시물-크롤링)
 - [장소 검색 및 추가](#장소-검색-및-추가)
 - [온도 단위 설정](#온도-단위-설정)
