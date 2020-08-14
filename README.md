@@ -43,16 +43,11 @@
 
 ### [상품 관련 검색어 크롤링](https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/NshoppingDBCrawler_hi.py)
 
-위치 리스트(현재 위치 + 저장된 위치)의 날씨를 각각 가로 스크롤로 전환하여 조회 가능
-
-![](./images/display-4.gif)
-
+![스크린샷, 2020-08-14 15-50-55](https://user-images.githubusercontent.com/64175895/90222165-7b8aea80-de46-11ea-89a0-9286b278c23e.png)
 
 ### [instagram 인기 게시물 크롤링](https://github.com/kim-so-hyeon/Naum-Web-Service/blob/master/webservice/views.py)
 
-추가했던 장소 리스트를 볼 수 있고, 삭제할 수 있다
-
-![](./images/display-5.gif)
+![스크린샷, 2020-08-14 15-52-51](https://user-images.githubusercontent.com/64175895/90222167-7e85db00-de46-11ea-9989-deae1b250b69.png)
 
 ### [텍스트 특수기호 클렌징 작업](https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/MakeResultVal_hi.ipynb)
 
