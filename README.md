@@ -13,7 +13,6 @@
 &nbsp;
  
 ![99F0AC4B5CBF360009](https://user-images.githubusercontent.com/64175895/90209667-f512e080-de26-11ea-8e6e-4e3296c328eb.jpeg)
-![99F8FB4B5CBF35FF24](https://user-images.githubusercontent.com/64175895/90209668-f5ab7700-de26-11ea-9981-b76f8eb724e1.jpeg)
 
 ---
 
