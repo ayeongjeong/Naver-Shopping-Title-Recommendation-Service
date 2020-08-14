@@ -30,16 +30,7 @@
  
 ![99F0AC4B5CBF360009](https://user-images.githubusercontent.com/64175895/90209667-f512e080-de26-11ea-8e6e-4e3296c328eb.jpeg)
 
----
-
-<p float="left">
-  <img src="./images/display-1.gif" width="250" />
-  <img src="./images/display-2.gif" width="250" /> 
-  <img src="./images/display-3.gif" width="250" />
-</p>
-
-
----
+&nbsp;
 
 ## 전처리 과정
 
