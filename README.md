@@ -26,13 +26,6 @@
 |       `윤혜인`        | `네이버 검색어 및 트렌드 크롤링` & `데이터 EDA 및 모델링`&`최종 보고서 작성` |
 |       `정아영`        | `Django 웹 서버 구축 및 디자인` & `시각화, 인스타그램 크롤링 작업` & `모델 선정 및 테스트`  |
 
-
-|구성원|역할|
-|:------------:|:------------:|
-|김소현|크롤링으로 축적된 DB 관린 및 전저리 작업|
-|윤혜인|그대에게는 벽이 느껴져요 완벽|
-|정아영|전반적인 관리감독과 함께 신의 영역을 넘봄|
-
 &nbsp;
 
 ---
@@ -239,192 +232,43 @@ API 에서 받아온 date & time (UTC 표준)  → 각 나라별 시간으로 �
 
 ---
 
-## WEB Server 구동 화면
+# What is Naum Service ?
 
-### Page View Controller 에서 계속해서 WeatherViewController 를 생성하는 문제
-
-- 문제상황  
-  - PageViewController 에서 swipe 에 따른 이전/이후 페이지 요청시마다 새롭게 view controller instance (WeatherViewController) 를 생성
-  - 메모리 부하로 인해 갑자기 꺼지는 현상
-- 해결 방법 : **View Controller Caching - NSCache**
-  - NSCache 
-  
-    - 캐싱을 구현한 클래스로 mutable dictionary type 처럼 사용할 수 있다 - key 를 통해 캐싱한 인스턴스 접근 가능
-    - 디바이스가 메모리 부족을 겪을 때 이 캐시에 있는 인스턴스의 메모리 공간을 자동으로 회수함
-  
-    ```swift
-    var cachedWeatherViewControllers = NSCache<NSNumber, WeatherViewController>()
-    ```
-  
-  - view controller를 한번 생성한 뒤, caching 하여 이후의 view controller 의 요청이 있을 때, 이미 인스턴스가 있다면 이를 반환하는 기능을 구현
-  
-  - PageViewController 에서 캐싱한 WeatherViewController 인스턴스 관리
-    - Key: page index (`NSNumber` type)
-    - Value: `WeatherViewController` instance
+![image](https://newsimg.hankookilbo.com/cms/articlerelease/2020/08/08/4c8c98e2-84b1-4426-bf07-4a534605bc4e.png)</br>
+[이미지 출처:https://www.hankookilbo.com/News/Read/A2020080801130005439?did=NA]
+</br>
+- 플랫폼 기업의 다양한 창업 지원책으로 중장년층의 온라인 창업이 늘어나고 있습니다. 특히 네이버 스마트스토어는 소상공인을 위한 쉽고 다양한 기술 지원과 교육을 병행하고 있어 판매자 수와 매출액의 꾸준한 증가를 보여주고 있습니다.
+국내 온라인 창업이나 부업으로 네이버 스마트스토어의 선택이 높아짐에 따라 데이터를 활용하여 온라인 판매 초심자에게 상품명에 대한 가이드를 제공하고자 하는 것이 NAUM Project의 시작입니다.
 
 &nbsp;
 
-### 마지막으로 본 위치를 리스트에서 삭제할 경우
+## Naum 서비스 메인 페이지 화면
+![image](https://trello-attachments.s3.amazonaws.com/5ef9b25e65d7ed813a5ae0ce/5f33d3e1b81df3575cfbc6d9/1c63d7acf3df27af522029da1bf9b667/MainPage.png)
 
-- 문제상황
-  - 마지막으로 날씨 정보를 본 위치를 리스트에서 삭제할 경우, 다시 page view 로 돌아갔을 때 page index 가 불일치 하는 현상
-- 해결 방법 
-  - 삭제시 위치정보의 index 가 마지막일 경우, 마지막으로 본 list index 를 0으로 설정한다.
-
-&nbsp;
-
-### API 에서 받아온 데이터 - 시간별 O 일별 X
-
-- 문제상황
-  - open weather map 의 5일 / 3시간 api 에는 3시간 마다의 날씨 예측 정보는 있지만, 일별 예측 정보는 없다.
-  - 따라서, 3시간 마다의 데이터를 일별로 분류하고 이를 다시 가공하는 절차가 필요
-- 해결방법
-  - `WeatherData` → `WeatherViewModel` 이 가진 각 model 별로 가공하는 역할을 담당하는 클래스 구현
-  - `WeatherBuilder`
-  - 3시간 별 데이터를 일자별로 모아서, 일자별 최대/최소 온도를 계산 → `HourlyWeatherItem` 으로 만들기
+- 네이버 쇼핑에서 식품분야만을 서비스 대상으로 우선 선정하였습니다.
+메인화면에서 네이버와 동일하게 카테고리를 설정하게 하였고, 상품명과 제목을 각각 입력할 수 있도록 입력창을 생성하였습니다. 
 
 &nbsp;
 
+## 로딩 페이지 추가
+![image](https://trello-attachments.s3.amazonaws.com/5ef9b25e65d7ed813a5ae0ce/5f33d3e1b81df3575cfbc6d9/f139ccb65e31d77ac8e2666d5e314562/LoadingPage.png)
 
-
----
-
-## 관련 학습 내용
-
-### URL Loading System
-
-> 표준 인터넷 프로토콜을 사용하여 서버와 url 로 소통하는 방식
-
-URL로 확인할 수 있는 리소스에 접근하는 방식을 URL Loading System 이라 한다.
-
-resource loading 은 **asynchronously** (**비동기**) 로 수행되므로, 유저의 이벤트에 응답할 수 있고 들어오는 데이터나 에러를 처리할 수 있다.
-
-#### URLSession 
-
-> Url 로 request 를 보내거나 받는 일을 담당하는 객체
-
-- 설정 : `URLSessionConfiguration`
-  - default 
-  - ephemeral
-  - background
-- `URLSession` instance 는 `URLSessionTask` 인스턴스를 한개 이상 생성하여 사용한다. 
-  - GET request 통해 데이터를 받아오는 일 : `URLSessionDataTask`
-  - POST / PUT request 통해 파일을 업로드 하는 일 : `URLSessionUploadTask`
-  - 원격 서버에서 파일을 다운로드 해오는 일 : `URLSessionDownloadTask`
-- Task 상태
-  - suspend
-  - resume
-  - cancel
-- URLSession 이 데이터를 반환하는 두가지 방법 (비동기적으로 수행되므로, 끝남을 알리는 방법)
-  1. completion handler - task 가 끝날 때 실행됨
-  2. delegate 의 method 호출
-
-
-
-#### URLComponents
-
-> URL 을 구성하는 요소들을 구조체로 나타냄
-
-- queryItem property : URLQueryItem (name -value 짝으로 구성되어 URL 의 query 부분을 담당)
-- url property : 구성요소들로부터 생성된 URL
-
-
-
-### 네트워크
-
-데이터를 URL 로부터 가져오려면 
-
-- 어떤 데이터를 주세요 : request
-- 응답 : reponse
-
-#### URLSession 활용한 data GET
-
-```swift
-func dataTask(with url: URL, 
-completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
-```
-
-
-
-- `shared` : singleton URLSession instance - 간단한 request 용도
-
-```swift
-let task = URLSession.shared.dataTask(with: url) {
-	// completion handler
-}
-```
-
-
-
-- Data : bytes or nil(error)
-- reponse: reponse 의 구현체. HTTPURLReponse 로 타입 캐스팅 가능
-- error: error 발생시 값 있음. Nil 이면 성공
-
-
-
-- 네트워크 종료시 resume()
-
-
-
-
-
-### GCD (Grand Central Dispatch)
-
-비동기 수행을 원할 때, main queue(main flow) 말고 다른 수행 queue 로 작업을 보내고 싶을 때 사용
-
-main queue : system 이 제공하는 queue로 모든 UI code 가 수행되어야 하는 곳
-
-```swift
-var items: [Item]?
-
-DispatchQueue.main.async {
-    items = findItems(matching: "News")
-}
-// async 클로져가 실행 완료 될 때, item 에 값이 할당 된다.
-// 단순히 저 선언문 지나갔다고 실행 완료된게 아님
-```
-
-network request 같은 무거운 작업을 할 때는 background queue 에서 실행되는게 앱의 main 에서 실행되는것보다 권장됨. - UI 는 다른 일을 하는 동안 무거운 작업들을 뒤에서 할 수 있으므로
-
-
-
-### View Controller 양방향 데이터 전달
-
-- view controller present 관계
-  - presenting view controller : 나(view controller) 를 띄워준, 보여준 view controller
-  - presented view controller : 내가 (view controller) present 하는, 띄운, 보여준 view controller
-
-![](https://github.com/daheenallwhite/swift-photoframe/raw/daheenallwhite/images/vc-relationship.jpeg)
-
-- view controller 간 데이터 전달
-  - 보여줄 view controller 인스턴스를 생성하여 `present()` method 
-  - 다시 현재의 view controller 를 보여준 이전의 view controller 로 데이터를 보내려면? delegate 통해 전달~전달
-    - 쉽게 말해서 새로운 view controller 를 instantiate 해서 present 하기 전에 내가 널 보냈다는 연결을 delegate 를 통해 하는 것이다
-    - 그 연결 방식은 protocol 을 통해서 해당 protocol을 구현한 타입이라면 누구나 delegate 로 소통할 수 있다는 뜻이다.
-
-### UserDefaults
-
-앱의 data 를 백그라운드 상태 혹은 종료시에도 없어지지 않고 persistent(영구) 보존할 수 있도록 해주는 user default database
-
-- key-value 형태로 저장된다. Key 는 String 만 가능
-- 저장 가능한 Value 형태 : NSData, NSString, NSNumber, NSArray, NSDictionary
-- 특성
-  - UserDefaults 통해 가져온 데이터는 immutable 
-  - plist extension 으로 저장됨
-  - app launch 될 때, memory 에 올라온다. 
-- UserDefaults 변경에 알림을 받고 싶다면
-  - didChangeNotification 에 observer 를 등록하면 된다.
-  
-  
-  |헤더1|헤더2|
-|----|----|
-|셀1  | 셀2|
-|셀3  | 셀3|
-|셀3  | 셀3|
-|셀3  | 셀3|  
+- 서비스 제공을 위해 로딩시간이 발생되어, input값이 들어올 경우 로딩시간 동안 노출되는 로딩페이지를 추가하였습니다. 
 
 &nbsp;
 
-|좌측정렬  |가운데정렬  |우측정렬  |
-|:-------|:-------:|-------:|
-|1       |2        |3       |
+## 서비스 화면 Example 1
+![image](https://trello-attachments.s3.amazonaws.com/5ef9b25e65d7ed813a5ae0ce/5f33d3e1b81df3575cfbc6d9/f20b729646cca32cc1c232287315f4f0/image.png)
+- 랭킹 순위를 기준으로 등급을 4가지(A,B,C,D)로 나누었습니다. 
+- 랭킹이 높은 등급 A의 테스트 데이터로 Naum검색을 해 본 화면입니다. 
+- 제목에 대한 등급뿐만 아니라 상품 마케팅을 위한 서비스를 추가적으로 제공하였습니다.
+  - ① 네이버스토어에서 해당 상품명과 같이 가장 많이 쓰인 키워드들 제공
+  - ② 상품명의 최근 3년간 네이버 검색어 트렌드를 Bokeh를 이용한 그래프로 시각화하여 제공
+  - ③ instagram에서 해당 상품명을 해시태그로 검색하였을 때 인기게시물로 상위에 노출되는 피드 제공
+
+&nbsp;
+
+## 서비스 화면 Example 2
+![image](https://trello-attachments.s3.amazonaws.com/5ef9b25e65d7ed813a5ae0ce/5f33d3e1b81df3575cfbc6d9/8a8379fd896c6b2fb89511b0ee13bb06/image.png)
+
+&nbsp;
