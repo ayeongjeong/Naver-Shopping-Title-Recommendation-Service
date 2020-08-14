@@ -34,34 +34,33 @@
 
 ## 전처리 과정
 
-- [상품 관련 검색어 트렌드 크롤링](https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/NshoppingDBCrawler_hi.py)
-- [instagram 인기 게시물 크롤링](https://github.com/kim-so-hyeon/Naum-Web-Service/blob/master/webservice/views.py)
-- [title ](#장소-검색-및-추가)
-- [온도 단위 설정](#온도-단위-설정)
-- [사용자 설정 저장](#사용자-설정-저장)
+- [상품 관련 검색어 트렌드 크롤링](#상품-관련-검색어-트렌드-크롤링)
+- [instagram 인기 게시물 크롤링](#instagram-인기-게시물-크롤링)
+- [텍스트 특수기호 클렌징 작업](#텍스트-특수기호-클렌징-작업)
+- [워드클라우드 함수화](#워드클라우드-함수화)
 
  &nbsp;
 
-### 상품 관련 검색어 크롤링
+### [상품 관련 검색어 크롤링](https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/NshoppingDBCrawler_hi.py)
 
 위치 리스트(현재 위치 + 저장된 위치)의 날씨를 각각 가로 스크롤로 전환하여 조회 가능
 
 ![](./images/display-4.gif)
 
 
-### instagram 인기 게시물 크롤링
+### [instagram 인기 게시물 크롤링](https://github.com/kim-so-hyeon/Naum-Web-Service/blob/master/webservice/views.py)
 
 추가했던 장소 리스트를 볼 수 있고, 삭제할 수 있다
 
 ![](./images/display-5.gif)
 
-### 장소 검색 및 추가
+### [텍스트 특수기호 클렌징 작업](https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/MakeResultVal_hi.ipynb)
 
 원하는 장소를 검색하여 추가하고, 관련 날씨 정보를 볼 수 있다
 
 ![](./images/display-6.gif)
 
-### 온도 단위 설정
+### [워드클라우드 함수화](https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/Naver%20shopping%20preprocessing.ipynb)
 
 온도 단위를 **섭씨 혹은 화씨**로 변환하여 볼 수 있다
 
