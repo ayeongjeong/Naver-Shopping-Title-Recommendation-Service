@@ -30,7 +30,7 @@
 
 - [상품 관련 검색어 트렌드 크롤링](https://github.com/kim-so-hyeon/Naver-Shopping-Title-Recommendation-Service/blob/develop/NshoppingDBCrawler_hi.py)
 - [instagram 인기 게시물 크롤링](https://github.com/kim-so-hyeon/Naum-Web-Service/blob/master/webservice/views.py)
-- [장소 검색 및 추가](#장소-검색-및-추가)
+- [title ](#장소-검색-및-추가)
 - [온도 단위 설정](#온도-단위-설정)
 - [사용자 설정 저장](#사용자-설정-저장)
 
