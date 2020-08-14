@@ -1,6 +1,8 @@
 # NAUM 서비스 프로젝트(Naver-shopping Attractive User Message)  
 >	**[네이버 스마트스토어 상품의 카테고리·종류·제목에 관한 등급 테스트 서비스 바로 이동하기](https://naum-test-frcsq.run.goorm.io/main/)**  
 
+### 구성원 및 역할 분담
+
 &nbsp;
 
 ### 과정
@@ -8,7 +10,6 @@
 - [전처리](#전처리-과정)
 - [모델 설계 및 구현](#모델-설계-및-구현)
 - [WEB Server 구동 화면](#WEB-Server-구동-화면)
-- [](#관련-학습-내용)
 
 &nbsp;
  
