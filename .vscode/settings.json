@@ -1,5 +1,5 @@
 {
-    "python.pythonPath": "/home/sundooedu/anaconda3/bin/python",
+    "python.pythonPath": "C:\\Users\\home\\anaconda3\\python.exe",
     "sqltools.connections": [
         {
             "askForPassword": true,
