@@ -1,5 +1,5 @@
 # NAUM 서비스 프로젝트(Naver-shopping Attractive User Message)  
-
+![image](./naum_result.gif)
 &nbsp;
 
 ## 프로젝트 주제 선정 이유와 목표
